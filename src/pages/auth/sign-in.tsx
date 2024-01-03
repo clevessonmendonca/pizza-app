@@ -1,41 +1,42 @@
-import { Helmet } from 'react-helmet-async'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Link } from "react-router-dom";
 
 const signInForm = z.object({
   email: z.string().email(),
-})
+});
 
-type SignInForm = z.infer<typeof signInForm>
+type SignInForm = z.infer<typeof signInForm>;
 
 export const SignIn = () => {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<SignInForm>()
+  } = useForm<SignInForm>();
 
   async function handleSignIn(data: SignInForm) {
     try {
-      console.log(data)
+      console.log(data);
 
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      toast.success('Enviamos um link de notificação ao seu email.', {
+      toast.success("Enviamos um link de notificação ao seu email.", {
         action: {
-          label: 'Reenviar',
+          label: "Reenviar",
           onClick: () => {
-            handleSignIn(data)
+            handleSignIn(data);
           },
         },
-      })
+      });
     } catch (error) {
-      toast.error('Credenciais inválidas.')
+      toast.error("Credenciais inválidas.");
     }
   }
 
@@ -43,6 +44,11 @@ export const SignIn = () => {
     <>
       <Helmet title="Login" />
       <div className="p-8">
+        <Button asChild className="absolute right-8 top-8" variant="ghost">
+          <Link to="/sign-up" className="">
+            Novo estabelecimento
+          </Link>
+        </Button>
         <div className="flex w-[350px] flex-col justify-center gap-6">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
@@ -56,7 +62,7 @@ export const SignIn = () => {
           <form onSubmit={handleSubmit(handleSignIn)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Seu e-mail</Label>
-              <Input id="email" type="email" {...register('email')} />
+              <Input id="email" type="email" {...register("email")} />
             </div>
 
             <Button type="submit" disabled={isSubmitting} className="w-full">
@@ -66,5 +72,5 @@ export const SignIn = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

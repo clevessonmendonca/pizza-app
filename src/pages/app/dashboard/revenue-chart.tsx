@@ -12,7 +12,7 @@ import {
   XAxis,
   YAxis,
   Line,
-  Tooltip,
+  CartesianGrid,
 } from "recharts";
 
 const data = [
@@ -53,6 +53,9 @@ export const RevenueChart = () => {
               axisLine={false}
               tickLine={false}
             />
+
+            <CartesianGrid vertical={false} className="stroke-muted" />
+
             <Line
               type="linear"
               stroke={colors.violet["500"]}

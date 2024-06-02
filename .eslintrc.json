@@ -1,7 +1,7 @@
 {
-  "extends": ["@rocketseat/eslint-config/react"],
-  "plugins": ["simple-import-sort"],
+  "extends": [],
+  "plugins": [],
   "rules": {
-    "simple-import-sort/imports": "error"
+    // "simple-import-sort/imports": "error"
   }
 }
